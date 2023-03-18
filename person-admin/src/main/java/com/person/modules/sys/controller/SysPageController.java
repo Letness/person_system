@@ -27,7 +27,6 @@ public class SysPageController {
 
 	@RequestMapping(value = {"/", "index.html"})
 	public String index(){
-		System.out.println("index");
 		return "index";
 	}
 

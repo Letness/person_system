@@ -865,6 +865,8 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- ----------------------------
 -- Table structure for b_announcement
 -- ----------------------------
+
+DROP IN EXISTS TABLE `b_announcement`;
 CREATE TABLE `b_announcement` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(128) DEFAULT NULL COMMENT '公告名称',
