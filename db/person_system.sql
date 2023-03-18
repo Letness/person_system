@@ -861,3 +861,16 @@ INSERT INTO `sys_user_role` VALUES (10, 3, 3);
 INSERT INTO `sys_user_role` VALUES (11, 4, 4);
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+-- ----------------------------
+-- Table structure for b_announcement
+-- ----------------------------
+CREATE TABLE `b_announcement` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(128) DEFAULT NULL COMMENT '公告名称',
+  `content` varchar(5000) DEFAULT NULL COMMENT '公告内容',
+ `create_user` varchar(128) DEFAULT NULL COMMENT '发布人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='公告管理';
