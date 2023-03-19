@@ -33,4 +33,10 @@ public interface SysUserDao extends BaseMapper<SysUserEntity> {
 	 */
 	List<Long> queryAllMenuId(Long userId);
 
+	/**
+	 * 修改用户基本信息
+	 * @param entity
+	 */
+	void modifyUser(SysUserEntity entity);
+
 }

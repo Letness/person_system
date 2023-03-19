@@ -17,6 +17,7 @@ import com.person.modules.sys.service.SysUserRoleService;
 import com.person.modules.sys.service.SysUserService;
 import com.person.modules.sys.shiro.ShiroUtils;
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -149,6 +150,16 @@ public class SysUserController extends AbstractController {
 
         sysUserService.removeByIds(Arrays.asList(userIds));
 
+        return R.ok();
+    }
+
+    @SysLog("修改用户基本信息")
+    @PostMapping("/modify")
+    public R modify(@RequestBody SysUserEntity user) {
+        if (user.getUserId() != getUserId()) {
+            return R.error("禁止修改他人信息");
+        }
+        sysUserService.modify(user);
         return R.ok();
     }
 }
