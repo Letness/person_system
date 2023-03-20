@@ -1,31 +1,219 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>欢迎页</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="${request.contextPath}/statics/css/bootstrap.min.css">
+    <script type="text/javascript" src="${request.contextPath}/statics/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/statics/plugins/layui/layui.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/statics/libs/vue.min.js"></script>
 </head>
-<body>
-<div class="panel panel-default">
-    <div class="panel-heading">基本信息</div>
-    <div style="padding: 10px 0 20px 10px;">
-        <h3>欢迎来到，<strong>中国移动人事管理系统</strong></h3>
-<!--        <ul>-->
-<!--            <li>采用Spring、MyBatis、Shiro框架，开发的一套权限系统，极低门槛，拿来即用。</li>-->
-<!--            <li>设计之初，就非常注重安全性，为企业系统保驾护航，让一切都变得如此简单。</li>-->
-<!--            <li>提供了代码生成器，只需编写30%左右代码，其余的代码交给系统自动生成，可快速完成开发任务</li>-->
-<!--            <li>推荐使用阿里云服务器部署项目，免费领取阿里云优惠券，请点击【<a href="https://promotion.aliyun.com/ntms/act/ambassador/sharetouser.html?userCode=y93lfwbg&amp;productCode=dmspre&amp;utm_source=y93lfwbg" target="_blank">免费领取</a>】</li>-->
-<!--        </ul>-->
 
-<!--        <h3>&nbsp;&nbsp;&nbsp;获取帮助</h3>-->
-<!--        <ul>-->
-<!--            <li>Git地址：<a href="https://gitee.com/renrenio/person_system" target="_blank">https://gitee.com/renrenio/person_system</a></li>-->
-<!--            <li>官方社区：<a href="/community" target="_blank">/community</a></li>-->
-<!--            <li>如需关注项目最新动态，请Watch、Star项目，同时也是对项目最好的支持</li>-->
-<!--        </ul>-->
+<body>
+    <div class="panel panel-default">
+        <div class="panel-heading">个人信息</div>
+        <div style="padding: 10px 0 20px 10px;">
+            <table>
+                <tr>
+                    <td>
+                        姓名：
+                    </td>
+                    <td>
+                        <span id="userId">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        用户名：
+                    </td>
+                    <td>
+                        <span id="username">
+
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        电话号码：
+                    </td>
+                    <td>
+                        <span id="mobile">
+
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        邮箱：
+                    </td>
+                    <td>
+                        <span id="email">
+
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td cospan="2">
+                        <a class="btn btn-primary" href='javascript:;' onClick='updateUser()'><i class='fa fa-lock'></i> &nbsp;修改信息</a>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
     </div>
-</div>
+
+    <div id="ddd" class="panel panel-default" style="padding:40px;display: none;">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">姓名</div>
+                <div class="col-sm-10" style="text-align:left;">
+                    <input placeholder="姓名" name="nameinput" id="nameinput" class="layui-input" autocomplete="off">
+                    <input type="hidden" id="userIdinput" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">用户名</div>
+                <div class="col-sm-10">
+                    <input placeholder="用户名" name="usernameinput" id="usernameinput" class="layui-input"
+                        autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">电话号码</div>
+                <div class="col-sm-10">
+                    <input placeholder="电话号码" name="mobileinput" id="mobileinput" class="layui-input"
+                        autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">邮箱</div>
+                <div class="col-sm-10">
+                    <input placeholder="邮箱" name="emailinput" id="emailinput" class="layui-input" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" onClick="saveOrUpdate()" value="确定" />
+            </div>
+        </form>
+    </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">公告信息</div>
+        <div id="announcementListDiv" style="padding: 10px 0 20px 10px;">
+
+        </div>
+    </div>
+
 </body>
+
 </html>
+<script>
+    $(function () {
+        //填充数据
+        var userId = 1;//修改1
+        var qdata = {
+            limit: 5,
+            page: 1,
+            orderBy: "update_time",
+
+        }
+        $.ajax({
+            type: "GET",
+            url: "/sys/user/info",//根据用户id获取用户//修改1
+            dataType: "json",
+            success: function (result) {
+                $("#userId").html(result.user.userId);
+                $("#name").html(result.user.name);
+                $("#username").html(result.user.username);
+                $("#mobile").html(result.user.mobile);
+                $("#email").html(result.user.email);
+
+                $("#userIdinput").val(result.user.userId);
+                $("#nameinput").val(result.user.name);
+                $("#usernameinput").val(result.user.username);
+                $("#mobileinput").val(result.user.mobile);
+                $("#emailinput").val(result.user.email);
+            }
+        });
+
+
+        $.ajax({
+            type: "GET",
+            url: "person/announcement/list",
+            data: qdata,
+            dataType: "json",
+            success: function (result) {
+                for (i = 0; i < result.page.list.length; i++) {
+                    $("#announcementListDiv").append("<div><a href='javascript:;' onClick='aaa(" + JSON.stringify(result.page.list[i]) + ")'><i class='fa fa-lock'></i> &nbsp;" + result.page.list[i].name + "</a></div>")
+                }
+            }
+        });
+        // const data = {name:111,content:222}
+        // const list = [data,data,data,data,data,data]
+        // for(i=0;i<list.length;i++){
+        //     // $("#announcementListDiv").append('<div><a href="javascript:;" onClick="aaa('+list[i].name+','+list[i].content+')"><i class="fa fa-lock"></i> &nbsp;'+list[i].name+'</a></div>')
+        //     $("#announcementListDiv").append("<div><a href='javascript:;' onClick='aaa("+JSON.stringify(list[i])+")'><i class='fa fa-lock'></i> &nbsp;"+list[i].name+"</a></div>")
+        // }
+
+    })
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        var $ = layui.$; //获得layui中的jquery对象
+        //layer.msg('hello'); 页面弹出提示
+
+
+    });
+    //修改
+    function aaa(data) {
+        layer.open({
+            type: 0,
+            title: data.name,
+            area: ['806px', '467px'],
+            closeBtn: 1,
+            shadeClose: false,
+            content: data.content
+        });
+    }
+    //
+    //打开修改用户页面
+    function updateUser() {
+
+        layer.open({
+            type: 1,
+            title: '修改个人信息',
+            closeBtn: 1,
+            area: ['606px', '367px'],
+            shadeClose: false,
+            content: $("#ddd")
+        });
+    }
+    function saveOrUpdate() {
+        const pdata = {
+            userId: $("#userIdinput").val(),
+            name: $("#nameinput").val(),
+            username: $("#usernameinput").val(),
+            mobile: $("#mobileinput").val(),
+            email: $("#emailinput").val(),
+        }
+        $.ajax({
+            type: "POST",
+            url: "/sys/user/modify",//修改用户信息接口
+            data: JSON.stringify(pdata),
+            contentType: "application/json",
+            success: function (result) {
+                layer.open({
+                    type: 0,
+                    area: ['806px', '467px'],
+                    closeBtn: 1,
+                    shadeClose: false,
+                    content: "成功"
+                });
+            }
+        });
+    }
+</script>
