@@ -823,7 +823,8 @@ CREATE TABLE `sys_user`  (
   `mobile` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '手机号',
   `status` tinyint(4) NULL DEFAULT NULL COMMENT '状态  0：禁用   1：正常',
   `dept_id` bigint(20) NULL DEFAULT NULL COMMENT '部门ID',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NOT NULL DEFAULT now() COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT now() COMMENT '更新时间',
   `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `user_no` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE,
@@ -833,12 +834,12 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'admin', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', 'root@renren.io', '13612345678', 1, 1, '2016-11-11 11:11:11', '管理员', '0001');
-INSERT INTO `sys_user` VALUES (2, 'wdc', 'a977e04a469ee5b213c31dc60d03f75de2bfeda871f465c723c304313f748e7d', '1sbkoGf5x7Q5lqxvCs5I', '1111@qq.com', '18651234456', 1, 4, '2020-05-15 22:29:02', '王大锤', '0002');
-INSERT INTO `sys_user` VALUES (3, 'cw', '676bd505a6d523cb00f4f79bf6dc7a2954d761a3aee0d045c21f8d6e2172a179', '2E5mvF1xjXFoY0narVz9', 'gy@qq.com', '13455676543', 1, 6, '2020-05-16 15:11:08', '财务小王', '0003');
-INSERT INTO `sys_user` VALUES (4, 'rs', 'c4ade571b45f569230b7782b9d657bc6e724913d7d429bf742ad17dabf0753bc', 'NF4cYNKNmsMA997exGGN', 'zf@qq.com', '19877678790', 1, 7, '2020-05-16 15:11:43', '人事小李', '0004');
-INSERT INTO `sys_user` VALUES (5, '存储', '7fe22afcdeaab59c453fd55c0723f7cd77cb974a1066c40721cd2a3cf0f0fce7', 'MVDlRa0lGADPLXgehAH2', 'cc@qq.com', NULL, 1, 4, '2020-05-24 13:38:31', '王婷婷', NULL);
-INSERT INTO `sys_user` VALUES (6, 'ceshi', '019c84a915b50ca574a65a157c2fef00ad33a6c6d613718808dd6409edef6a4a', 'TfWjU5q1e5nAtoRKlHZR', NULL, NULL, 1, 4, '2020-05-24 21:18:25', '测试手机', NULL);
+INSERT INTO `sys_user` VALUES (1, 'admin', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', 'root@renren.io', '13612345678', 1, 1, '2016-11-11 11:11:11', '2016-11-11 11:11:11', '管理员', '0001');
+INSERT INTO `sys_user` VALUES (2, 'wdc', 'a977e04a469ee5b213c31dc60d03f75de2bfeda871f465c723c304313f748e7d', '1sbkoGf5x7Q5lqxvCs5I', '1111@qq.com', '18651234456', 1, 4, '2020-05-15 22:29:02', '2016-11-11 11:11:11', '王大锤', '0002');
+INSERT INTO `sys_user` VALUES (3, 'cw', '676bd505a6d523cb00f4f79bf6dc7a2954d761a3aee0d045c21f8d6e2172a179', '2E5mvF1xjXFoY0narVz9', 'gy@qq.com', '13455676543', 1, 6, '2020-05-16 15:11:08', '2016-11-11 11:11:11', '财务小王', '0003');
+INSERT INTO `sys_user` VALUES (4, 'rs', 'c4ade571b45f569230b7782b9d657bc6e724913d7d429bf742ad17dabf0753bc', 'NF4cYNKNmsMA997exGGN', 'zf@qq.com', '19877678790', 1, 7, '2020-05-16 15:11:43', '2016-11-11 11:11:11', '人事小李', '0004');
+INSERT INTO `sys_user` VALUES (5, '存储', '7fe22afcdeaab59c453fd55c0723f7cd77cb974a1066c40721cd2a3cf0f0fce7', 'MVDlRa0lGADPLXgehAH2', 'cc@qq.com', NULL, 1, 4, '2020-05-24 13:38:31', '2016-11-11 11:11:11', '王婷婷', NULL);
+INSERT INTO `sys_user` VALUES (6, 'ceshi', '019c84a915b50ca574a65a157c2fef00ad33a6c6d613718808dd6409edef6a4a', 'TfWjU5q1e5nAtoRKlHZR', NULL, NULL, 1, 4, '2020-05-24 21:18:25', '2016-11-11 11:11:11', '测试手机', NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -872,7 +873,7 @@ CREATE TABLE `b_announcement` (
   `name` varchar(128) DEFAULT NULL COMMENT '公告名称',
   `content` varchar(5000) DEFAULT NULL COMMENT '公告内容',
  `create_user` varchar(128) DEFAULT NULL COMMENT '发布人',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+  `create_time` datetime NOT NULL DEFAULT now() COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT now() COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='公告管理';
