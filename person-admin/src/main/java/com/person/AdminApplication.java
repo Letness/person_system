@@ -17,7 +17,7 @@ public class AdminApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AdminApplication.class, args);
-		System.out.println("人事管理系統，启动成功！");
+		System.out.println("机场地勤人员综合信息平台，启动成功！");
 	}
 
 }
