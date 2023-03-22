@@ -528,6 +528,13 @@ INSERT INTO `sys_menu` VALUES (99, 98, '查看', NULL, 'person:train:list,person
 INSERT INTO `sys_menu` VALUES (100, 98, '新增', NULL, 'person:train:save', 2, NULL, 0);
 INSERT INTO `sys_menu` VALUES (101, 98, '编辑', NULL, 'person:train:update', 2, NULL, 0);
 INSERT INTO `sys_menu` VALUES (102, 98, '删除', NULL, 'person:train:delete', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (104, 0, '公告管理', 'modules/person/announcement.html', NULL, 0, 'fa fa-bullhorn', 6);
+INSERT INTO `sys_menu` VALUES (105, 109, '新增', NULL, 'person:announcement:save', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (106, 109, '修改', NULL, 'person:announcement:update', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (107, 109, '删除', NULL, 'person:announcement:delete', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (108, 109, '查看', NULL, NULL, 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (109, 104, '公告', 'modules/person/announcement.html', 'person:announcement', 1, 'fa fa-bullhorn', 1);
+
 
 -- ----------------------------
 -- Table structure for sys_oss
